@@ -20,7 +20,7 @@ Hexagon is a popular 2013/2014 Roblox Revival (Credits to Chloe/Shikataganaii fo
 
 Please do not re-host this to the public. we know it is a source code that can start your own revival but re-hosting is unrecommended for reasons.
 This repository is only created for testing out or understanding the logic of SvelteKit and Node made revivals and how they work.
-If you want to build your own roblox please use https://github.com/tp-link-extender/MercuryCore instead to build your own Roblox Revival.
+If you want to build your own roblox please use https://github.com/tp-link-extender/MercuryCore instead.
 
 # HOW TO SETUP
 
