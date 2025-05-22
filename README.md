@@ -6,9 +6,12 @@
 
 <div align="center">
 
-[![SvelteKit](https://img.shields.io/badge/SvelteKit-orange)](https://github.com/SkylerClock/Hexagon)
-[![Docker](https://img.shields.io/badge/Docker-blue)](https://github.com/SkylerClock/Hexagon)
+[![SvelteKit](https://img.shields.io/badge/SvelteKit-2.21.1-orange?logo=svelte)](https://github.com/SkylerClock/Hexagon)
+[![Docker](https://img.shields.io/badge/Docker-28.1.1-blue?logo=docker)](https://github.com/SkylerClock/Hexagon)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-yellow?logo=typescript)](https://github.com/SkylerClock/Hexagon)
+[![Node.js](https://img.shields.io/badge/Node.JS-24.1.0-green?logo=nodedotjs)](https://github.com/SkylerClock/Hexagon)
 [![Sushi](https://img.shields.io/badge/Developer-SushiDesigner-white)](https://github.com/SushiDesigner)
+[![Shikataganaii](https://img.shields.io/badge/Leaked_By-Chloe/Shikataganaii-white)](https://github.com/shikataganaii)
 
 Hexagon is a popular 2013/2014 Roblox Revival (Credits to Chloe/Shikataganaii for leaking this)
 </div>
