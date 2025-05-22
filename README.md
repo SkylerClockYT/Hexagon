@@ -16,9 +16,13 @@
 Hexagon is a popular 2013/2014 Roblox Revival (Credits to Chloe/Shikataganaii for leaking this)
 </div>
 
-# HOW TO SETUP
+# WARNING
 
-WARNING: Do not host publicly, this source is only used for learning capabilities and not for skidding
+Please do not re-host this to the public. we know it is a source code that can start your own revival but re-hosting is unrecommended for reasons.
+This repository is only created for testing out or understanding the logic of SvelteKit and Node made revivals and how they work.
+If you want to build your own roblox please use https://github.com/tp-link-extender/MercuryCore instead to build your own Roblox Revival.
+
+# HOW TO SETUP
 
 To setup/host hexagon you'll need the following dependencies:
 - Node JS
