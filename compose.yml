@@ -1,0 +1,125 @@
+services:
+  web:
+    build: .
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - hexagon-nw
+  db:
+    image: postgres:17
+    restart: always
+    volumes:
+      - hexagon-db:/var/lib/postgresql/data
+    networks:
+      - hexagon-nw
+    environment:
+      - POSTGRES_PASSWORD=hexagon
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready', '-d', 'postgres', '-U', 'postgres']
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+  cloudflared:
+    image: cloudflare/cloudflared
+    restart: always
+    command: tunnel run
+    env_file:
+      - .env
+    networks:
+      - hexagon-nw
+  backups:
+    image: tiredofit/db-backup:latest
+    restart: always
+    env_file:
+      - .env.backups
+    networks:
+      - hexagon-nw
+  caddy:
+    build: './caddy'
+    restart: always
+    volumes:
+      - type: bind
+        source: ./Caddyfile
+        target: /etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+      - '/home/sushi/hexagon-maintenance/build:/var/www/hexagon-backup'
+    networks:
+      - hexagon-nw
+    env_file:
+      - .env.caddy
+  umami:
+    image: docker.umami.is/umami-software/umami:postgresql-latest
+    env_file:
+      - .env.umami
+    depends_on:
+      db_umami:
+        condition: service_healthy
+    restart: always
+    networks:
+      - hexagon-nw
+  db_umami:
+    image: postgres:17
+    env_file: .env.umami
+    networks:
+      - hexagon-nw
+    volumes:
+      - umami-db:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready', '-d', 'postgres', '-U', 'postgres']
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+  ghost:
+    image: ghost:5-alpine
+    restart: always
+    networks:
+      - hexagon-nw
+    volumes:
+      - ghost:/var/lib/ghost/content
+    env_file: .env.ghost
+    depends_on:
+      db_ghost:
+        condition: service_started
+  db_ghost:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: hexagon
+    volumes:
+      - db_ghost:/var/lib/mysql
+    networks:
+      - hexagon-nw
+  prometheus:
+    image: prom/prometheus:latest
+    restart: always
+    networks:
+      - hexagon-nw
+    volumes:
+      - ./monitoring/:/etc/prometheus/
+  grafana:
+    image: grafana/grafana:latest
+    restart: always
+    networks:
+      - hexagon-nw
+    volumes:
+      - ./monitoring/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - grafana:/var/lib/grafana
+volumes:
+  hexagon-db:
+    external: true
+  caddy_data:
+  caddy_config:
+  umami-db:
+  ghost:
+  db_ghost:
+  grafana:
+networks:
+  hexagon-nw:

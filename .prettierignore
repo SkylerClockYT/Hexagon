@@ -1,0 +1,19 @@
+.DS_Store
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+# don't wanna fw code from other libs
+src/components/ui
+src/routes/(rbx)/[a=asset]sset/common
+drizzle
+.vscode
+static
+
+# Ignore files for PNPM, NPM and YARN
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
